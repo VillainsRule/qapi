@@ -1,0 +1,13 @@
+# modules
+node_modules
+bun.lock
+
+# protected
+*.db
+.env
+
+# output
+tailwind.css
+
+# macos
+.DS_Store

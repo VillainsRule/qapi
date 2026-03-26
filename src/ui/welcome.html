@@ -1,0 +1,31 @@
+<html>
+
+    <head>
+        <title>qapi | the question API</title>
+
+        <link rel="stylesheet" href="./tailwind.css">
+    </head>
+
+    <body class="h-screen flex flex-col py-12 px-5 sm:px-20 md:px-40">
+        <h1 class="text-5xl text-center font-bold">qapi</h1>
+        <h2 class="text-2xl text-center font-semibold mt-1.5">a question and answer API</h2>
+
+        <br>
+        <p class="text-lg">all endpoints require an Authorization header to access, which can be obtained by asking the
+            admin of this instance. available endpoints include:</p>
+        <br>
+
+        <span class="text-nowrap"><b>GET</b> <code>/api/v1/valid</code> - check an Authorization header.</span>
+        <pre
+            class="bg-gray-100 w-fit p-3 mt-2 rounded-lg">// queryParams<br>key=THE-KEY<br><br>// response<br>{<br>    exists: boolean<br>}</pre>
+
+        <br>
+
+        <span class="text-nowrap"><b>POST</b> <code>/api/v1/mcq</code> - answer an MCQ.</span>
+        <pre
+            class="bg-gray-100 w-fit p-3 mt-2 rounded-lg">// body<br>{<br>    question: "What is 2 + 2?",<br>    answers: ["2", "3", "4", "5"]<br>}<br><br>// response<br>{<br>    success: true,<br>    answer: "4"<br>}</pre>
+
+        <br><br>
+    </body>
+
+</html>
