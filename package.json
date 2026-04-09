@@ -3,6 +3,7 @@
     "main": "src/main.ts",
     "scripts": {
         "key": "bun cli/keys.ts",
+        "dev": "bun apidev",
         "apidev": "bun --watch src/main.ts",
         "prep": "bunx --bun @tailwindcss/cli -i ./src/ui/index.css -o ./src/ui/tailwind.css",
         "appdev": "bunx --bun @tailwindcss/cli -i ./src/ui/index.css -o ./src/ui/tailwind.css --watch"
@@ -14,6 +15,7 @@
     },
     "dependencies": {
         "@elysiajs/cors": "^1.4.1",
+        "@elysiajs/openapi": "^1.4.14",
         "elysia": "^1.4.26",
         "enquirer": "^2.4.1"
     }

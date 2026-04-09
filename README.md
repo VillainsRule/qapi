@@ -8,12 +8,13 @@
 <h2 align='center'>setup</h2>
 
 1. grab a deepseek API key with credits
-2. `git clone https://github.com/VillainsRule/qapi && cd qapi`
-3. `bun i`
-4. `bun prep`
-5. `cp .env.example .env && nano .env`
-6. `bun .`
-7. http://localhost:4402
+2. grab a mistral API key with credits
+3. `git clone https://github.com/VillainsRule/qapi && cd qapi`
+4. `bun i`
+5. `bun prep`
+6. `cp .env.example .env && nano .env`
+7. `bun .`
+8. http://localhost:4402
 
 key management --> `bun key`
 

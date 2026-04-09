@@ -117,6 +117,7 @@
 
         async mcq(question, answers) {
             if (!this.qapiRoot) throw new Error('qapi root not set');
+
             const req = await fetch(this.qapiRoot + '/api/v1/mcq', {
                 method: 'POST',
                 headers: { 'Authorization': this.accessCode, 'Content-Type': 'application/json' },
@@ -125,7 +126,40 @@
 
             const res = await req.json();
             if (!req.ok) throw new Error(res.error || 'Unknown error');
-            return res.answer;
+            return res;
+        }
+
+        async ocr(imageURL) {
+            if (!this.qapiRoot) throw new Error('qapi root not set');
+
+            const req = await fetch(this.qapiRoot + '/api/v1/ocr', {
+                method: 'POST',
+                headers: { 'Authorization': this.accessCode, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ imageURL })
+            });
+
+            const res = await req.json();
+            if (!req.ok) throw new Error(res.error || 'Unknown error');
+            return res;
+        }
+
+        async runJava(input) {
+            if (!this.qapiRoot) throw new Error('qapi root not set');
+
+            if (typeof input === 'string') input = [{ name: 'Main.java', content: input }];
+
+            if (!Array.isArray(input) || !input.every(f => typeof f.name === 'string' && typeof f.content === 'string'))
+                throw new Error('invalid runJava input - qapi must get an array of { name: string, content: string } objects or a single string (which will be treated as the content of Main.java)');
+
+            const req = await fetch(this.qapiRoot + '/api/v1/runner/java', {
+                method: 'POST',
+                headers: { 'Authorization': this.accessCode, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ files: input })
+            });
+
+            const res = await req.json();
+            if (!req.ok) throw new Error(res.error || 'Unknown error');
+            return res;
         }
     }
 
