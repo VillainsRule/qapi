@@ -3,29 +3,107 @@
     <head>
         <title>qapi | the question API</title>
 
-        <link rel="stylesheet" href="./tailwind.css">
+        <style>
+            * {
+                font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                margin: 0;
+                background: lab(98.2596 -0.247031 -0.706708);
+            }
+
+            main {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                padding: 7.5vh 15vw;
+                width: calc(100% - 30vw);
+                overflow: scroll;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            h2 {
+                margin-top: 8px;
+                text-align: center;
+            }
+
+            h3 {
+                margin-top: 12px;
+                text-align: center;
+            }
+
+            code {
+                font-family: monospace;
+            }
+
+            .a {
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+                margin-top: 40px;
+                font-size: 16px !important;
+            }
+
+            pre {
+                background: lab(96.1596 -0.0823438 -1.13575);
+                margin-top: 10px;
+                padding: 25px;
+                font-family: monospace;
+                border-radius: 8px;
+                max-width: fit-content;
+                text-wrap: auto;
+            }
+
+            pre * {
+                font-family: monospace;
+            }
+
+            i {
+                margin-left: 32px;
+            }
+
+            a {
+                color: lab(54.1736 13.3369 -74.6839);
+                text-decoration: none;
+            }
+
+            @media (max-width: 600px) {
+                main {
+                    padding: 5vh;
+                    width: calc(100% - 10vh);
+                }
+
+                .a {
+                    width: 100%;
+                }
+            }
+        </style>
     </head>
 
-    <body class="h-screen flex flex-col py-12 px-5 sm:px-20 md:px-40">
-        <h1 class="text-5xl text-center font-bold">qapi</h1>
-        <h2 class="text-2xl text-center font-semibold mt-1.5">a question and answer API</h2>
+    <body>
+        <main>
+            <h1>qapi</h1>
+            <h2>a question and answer API</h2>
 
-        <br>
-        <p class="text-lg">all endpoints require an Authorization header to access, which can be obtained by asking the
-            admin of this instance. available endpoints include:</p>
-        <br>
+            <br>
+            <p>qapi is locked, meaning you need a code directly from the instance admin to use it. you can request that
+                from them directly if you know the admin. if not, you're welcome to <a
+                    href='https://github.com/VillainsRule/qapi'>self-host</a> it.</p><br>
 
-        <span class="text-nowrap"><b>GET</b> <code>/api/v1/valid</code> - check an Authorization header.</span>
-        <pre
-            class="bg-gray-100 w-fit p-3 mt-2 rounded-lg">// queryParams<br>key=THE-KEY<br><br>// response<br>{<br>    exists: boolean<br>}</pre>
+            <p>to use the API: <a href='/docs'>read the docs</a></p><br>
 
-        <br>
+            <p>to use the browser SDK:</p>
+            <pre>const s = document.createElement('script');<br>s.src = '{{origin}}/sdk.js';<br>document.head.appendChild(s);<br>s.onload = () => {<br>    // run actions with the global `qapi` variable<br>}</pre><br>
 
-        <span class="text-nowrap"><b>POST</b> <code>/api/v1/mcq</code> - answer an MCQ.</span>
-        <pre
-            class="bg-gray-100 w-fit p-3 mt-2 rounded-lg">// body<br>{<br>    question: "What is 2 + 2?",<br>    answers: ["2", "3", "4", "5"]<br>}<br><br>// response<br>{<br>    success: true,<br>    answer: "4"<br>}</pre>
+            <p>actions include:</p>
+            <pre>qapi.mcq('question', ['opt 1', 'opt 2', 'opt 3']) // -> { answer: 1-based num index, thoughts: string }<br>qapi.ocr(imageURL) -> { text: string }<br>qapi.requestCode() // opens the code request modal<br>qapi.onAuthorize(callback) // when a code is entered and is valid; callback param = code</pre>
 
-        <br><br>
+            <br><br>
+        </main>
     </body>
 
 </html>
