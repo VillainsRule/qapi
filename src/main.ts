@@ -43,9 +43,14 @@ const prepareRequest = async ({ question, answers }: { question: string, answers
     });
 
     const json = await req.json();
-    const data = json.choices[0].message.content;
-    const parsed = JSON.parse(data);
-    return JSON.stringify(parsed);
+
+    if (json.choices) {
+        const data = json.choices[0].message.content;
+        return JSON.stringify(JSON.parse(data));
+    } else {
+        console.error('unexpected response from DeepSeek API:', json);
+        return JSON.stringify({ error: 'deepseek failed' });
+    }
 }
 
 const mainElysia = new Elysia({ name: 'main' })
